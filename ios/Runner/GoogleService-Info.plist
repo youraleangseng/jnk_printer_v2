@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>842891170771-m6uls5qnev4a25uea0anr0du0c44mge9.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.842891170771-m6uls5qnev4a25uea0anr0du0c44mge9</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBkR8Eh-YCLXANRcoGRg01UUPw82fwZzbc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>842891170771</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.printer</string>
+	<key>PROJECT_ID</key>
+	<string>printer-app-b4833</string>
+	<key>STORAGE_BUCKET</key>
+	<string>printer-app-b4833.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:842891170771:ios:5bed8ae57bb89501139526</string>
+</dict>
+</plist>
