@@ -9,10 +9,10 @@ import 'package:printer/application/auth/auth_bloc.dart';
 import 'package:printer/application/printer/printer_bloc.dart';
 import 'package:printer/application/storage/storage_bloc.dart';
 import 'package:printer/infrustructure/auth_provider.dart';
-import 'package:printer/infrustructure/blue_printer_provider.dart';
-import 'package:printer/infrustructure/printer_provider.dart';
 import 'package:printer/infrustructure/storage_provider.dart';
 import 'package:printer/presentation/pages/home_page.dart';
+
+import 'infrustructure/printer_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,8 +67,7 @@ class _MyAppState extends State<MyApp> {
           create: (context) => StorageBloc(StorageProvider()),
         ),
         BlocProvider<PrinterBloc>(
-          create: (context) => PrinterBloc(
-              Platform.isAndroid ? BluePrinterProvider() : PrinterProvider()),
+          create: (context) => PrinterBloc(PrinterProvider()),
         )
       ],
       child: ScreenUtilInit(

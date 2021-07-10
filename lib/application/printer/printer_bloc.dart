@@ -1,13 +1,12 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:blue_print_pos/models/blue_device.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pos_printer_manager/pos_printer_manager.dart';
 import 'package:printer/domain/failure/failure.dart';
 import 'package:printer/domain/i_printer_provider.dart';
 import 'package:printer/domain/print_doc/print_doc.dart';
-
 
 part 'printer_event.dart';
 part 'printer_state.dart';
@@ -42,7 +41,7 @@ class PrinterBloc extends Bloc<PrinterEvent, PrinterState> {
           (a) => state.copyWith(error: a.error, isLoading: false));
     }, scan: (ScanDevices value) async* {
       yield state.copyWith(isLoading: true, error: '');
-      final Either<Failure, List<BlueDevice>> response =
+      final Either<Failure, List<BluetoothPrinter>> response =
           await printerProvider.getNearbyDevices();
 
       yield response

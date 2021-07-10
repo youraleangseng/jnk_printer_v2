@@ -7,7 +7,7 @@ class PrinterState with _$PrinterState {
     bool isLoading,
     bool isConnected,
     String error,
-    List<BlueDevice> nearbyDevices,
+    List<BluetoothPrinter> nearbyDevices,
   ) = _PrinterState;
 
   factory PrinterState.initial() => const _PrinterState(false, false, '', []);

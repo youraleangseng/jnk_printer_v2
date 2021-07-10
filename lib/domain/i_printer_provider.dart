@@ -1,15 +1,16 @@
-import 'package:blue_print_pos/models/blue_device.dart';
 import 'package:dartz/dartz.dart';
+import 'package:pos_printer_manager/pos_printer_manager.dart';
+import 'package:pos_printer_manager/services/bluetooth_printer_manager.dart';
 import 'package:printer/domain/print_doc/print_doc.dart';
-
 
 import 'failure/failure.dart';
 
 abstract class IPrinterProvider {
-  dynamic get bluetooth;
+  BluetoothPrinterManager? get bluetooth;
+  set bluetooth(BluetoothPrinterManager? bluetooth);
   Future<bool> isConnected();
-  Future<Either<Failure, List<BlueDevice>>> getNearbyDevices();
-  Future<Option<Failure>> connectDevice(BlueDevice device);
+  Future<Either<Failure, List<BluetoothPrinter>>> getNearbyDevices();
+  Future<Option<Failure>> connectDevice(BluetoothPrinter device);
   Future<Option<Failure>> print(PrintDoc doc);
   void disconnect();
 }

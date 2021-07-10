@@ -20,7 +20,7 @@ class _$PrinterEventTearOff {
     return const ScanDevices();
   }
 
-  ConnectDevice connect(BlueDevice device) {
+  ConnectDevice connect(BluetoothPrinter device) {
     return ConnectDevice(
       device,
     );
@@ -45,7 +45,7 @@ mixin _$PrinterEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() scan,
-    required TResult Function(BlueDevice device) connect,
+    required TResult Function(BluetoothPrinter device) connect,
     required TResult Function(PrintDoc doc) print,
     required TResult Function() checkConnection,
   }) =>
@@ -53,7 +53,7 @@ mixin _$PrinterEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? scan,
-    TResult Function(BlueDevice device)? connect,
+    TResult Function(BluetoothPrinter device)? connect,
     TResult Function(PrintDoc doc)? print,
     TResult Function()? checkConnection,
     required TResult orElse(),
@@ -134,7 +134,7 @@ class _$ScanDevices implements ScanDevices {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() scan,
-    required TResult Function(BlueDevice device) connect,
+    required TResult Function(BluetoothPrinter device) connect,
     required TResult Function(PrintDoc doc) print,
     required TResult Function() checkConnection,
   }) {
@@ -145,7 +145,7 @@ class _$ScanDevices implements ScanDevices {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? scan,
-    TResult Function(BlueDevice device)? connect,
+    TResult Function(BluetoothPrinter device)? connect,
     TResult Function(PrintDoc doc)? print,
     TResult Function()? checkConnection,
     required TResult orElse(),
@@ -192,7 +192,7 @@ abstract class $ConnectDeviceCopyWith<$Res> {
   factory $ConnectDeviceCopyWith(
           ConnectDevice value, $Res Function(ConnectDevice) then) =
       _$ConnectDeviceCopyWithImpl<$Res>;
-  $Res call({BlueDevice device});
+  $Res call({BluetoothPrinter device});
 }
 
 /// @nodoc
@@ -213,7 +213,7 @@ class _$ConnectDeviceCopyWithImpl<$Res> extends _$PrinterEventCopyWithImpl<$Res>
       device == freezed
           ? _value.device
           : device // ignore: cast_nullable_to_non_nullable
-              as BlueDevice,
+              as BluetoothPrinter,
     ));
   }
 }
@@ -224,7 +224,7 @@ class _$ConnectDevice implements ConnectDevice {
   const _$ConnectDevice(this.device);
 
   @override
-  final BlueDevice device;
+  final BluetoothPrinter device;
 
   @override
   String toString() {
@@ -252,7 +252,7 @@ class _$ConnectDevice implements ConnectDevice {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() scan,
-    required TResult Function(BlueDevice device) connect,
+    required TResult Function(BluetoothPrinter device) connect,
     required TResult Function(PrintDoc doc) print,
     required TResult Function() checkConnection,
   }) {
@@ -263,7 +263,7 @@ class _$ConnectDevice implements ConnectDevice {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? scan,
-    TResult Function(BlueDevice device)? connect,
+    TResult Function(BluetoothPrinter device)? connect,
     TResult Function(PrintDoc doc)? print,
     TResult Function()? checkConnection,
     required TResult orElse(),
@@ -302,9 +302,9 @@ class _$ConnectDevice implements ConnectDevice {
 }
 
 abstract class ConnectDevice implements PrinterEvent {
-  const factory ConnectDevice(BlueDevice device) = _$ConnectDevice;
+  const factory ConnectDevice(BluetoothPrinter device) = _$ConnectDevice;
 
-  BlueDevice get device => throw _privateConstructorUsedError;
+  BluetoothPrinter get device => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ConnectDeviceCopyWith<ConnectDevice> get copyWith =>
       throw _privateConstructorUsedError;
@@ -384,7 +384,7 @@ class _$PrintDocument implements PrintDocument {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() scan,
-    required TResult Function(BlueDevice device) connect,
+    required TResult Function(BluetoothPrinter device) connect,
     required TResult Function(PrintDoc doc) print,
     required TResult Function() checkConnection,
   }) {
@@ -395,7 +395,7 @@ class _$PrintDocument implements PrintDocument {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? scan,
-    TResult Function(BlueDevice device)? connect,
+    TResult Function(BluetoothPrinter device)? connect,
     TResult Function(PrintDoc doc)? print,
     TResult Function()? checkConnection,
     required TResult orElse(),
@@ -483,7 +483,7 @@ class _$CheckConnection implements CheckConnection {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() scan,
-    required TResult Function(BlueDevice device) connect,
+    required TResult Function(BluetoothPrinter device) connect,
     required TResult Function(PrintDoc doc) print,
     required TResult Function() checkConnection,
   }) {
@@ -494,7 +494,7 @@ class _$CheckConnection implements CheckConnection {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? scan,
-    TResult Function(BlueDevice device)? connect,
+    TResult Function(BluetoothPrinter device)? connect,
     TResult Function(PrintDoc doc)? print,
     TResult Function()? checkConnection,
     required TResult orElse(),
@@ -541,7 +541,7 @@ class _$PrinterStateTearOff {
   const _$PrinterStateTearOff();
 
   _PrinterState call(bool isLoading, bool isConnected, String error,
-      List<BlueDevice> nearbyDevices) {
+      List<BluetoothPrinter> nearbyDevices) {
     return _PrinterState(
       isLoading,
       isConnected,
@@ -560,7 +560,8 @@ mixin _$PrinterState {
   bool get isLoading => throw _privateConstructorUsedError;
   bool get isConnected => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
-  List<BlueDevice> get nearbyDevices => throw _privateConstructorUsedError;
+  List<BluetoothPrinter> get nearbyDevices =>
+      throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PrinterStateCopyWith<PrinterState> get copyWith =>
@@ -576,7 +577,7 @@ abstract class $PrinterStateCopyWith<$Res> {
       {bool isLoading,
       bool isConnected,
       String error,
-      List<BlueDevice> nearbyDevices});
+      List<BluetoothPrinter> nearbyDevices});
 }
 
 /// @nodoc
@@ -610,7 +611,7 @@ class _$PrinterStateCopyWithImpl<$Res> implements $PrinterStateCopyWith<$Res> {
       nearbyDevices: nearbyDevices == freezed
           ? _value.nearbyDevices
           : nearbyDevices // ignore: cast_nullable_to_non_nullable
-              as List<BlueDevice>,
+              as List<BluetoothPrinter>,
     ));
   }
 }
@@ -626,7 +627,7 @@ abstract class _$PrinterStateCopyWith<$Res>
       {bool isLoading,
       bool isConnected,
       String error,
-      List<BlueDevice> nearbyDevices});
+      List<BluetoothPrinter> nearbyDevices});
 }
 
 /// @nodoc
@@ -662,7 +663,7 @@ class __$PrinterStateCopyWithImpl<$Res> extends _$PrinterStateCopyWithImpl<$Res>
       nearbyDevices == freezed
           ? _value.nearbyDevices
           : nearbyDevices // ignore: cast_nullable_to_non_nullable
-              as List<BlueDevice>,
+              as List<BluetoothPrinter>,
     ));
   }
 }
@@ -680,7 +681,7 @@ class _$_PrinterState implements _PrinterState {
   @override
   final String error;
   @override
-  final List<BlueDevice> nearbyDevices;
+  final List<BluetoothPrinter> nearbyDevices;
 
   @override
   String toString() {
@@ -720,7 +721,7 @@ class _$_PrinterState implements _PrinterState {
 
 abstract class _PrinterState implements PrinterState {
   const factory _PrinterState(bool isLoading, bool isConnected, String error,
-      List<BlueDevice> nearbyDevices) = _$_PrinterState;
+      List<BluetoothPrinter> nearbyDevices) = _$_PrinterState;
 
   @override // ignore: avoid_positional_boolean_parameters
   bool get isLoading => throw _privateConstructorUsedError;
@@ -729,7 +730,8 @@ abstract class _PrinterState implements PrinterState {
   @override
   String get error => throw _privateConstructorUsedError;
   @override
-  List<BlueDevice> get nearbyDevices => throw _privateConstructorUsedError;
+  List<BluetoothPrinter> get nearbyDevices =>
+      throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PrinterStateCopyWith<_PrinterState> get copyWith =>
