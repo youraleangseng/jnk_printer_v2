@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:pos_printer_manager/pos_printer_manager.dart';
 import 'package:printer/domain/failure/failure.dart';
 import 'package:printer/domain/i_printer_provider.dart';

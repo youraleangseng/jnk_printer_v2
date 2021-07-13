@@ -1,5 +1,7 @@
 import 'package:dartz/dartz.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:pos_printer_manager/pos_printer_manager.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:pos_printer_manager/services/bluetooth_printer_manager.dart';
 import 'package:printer/domain/print_doc/print_doc.dart';
 

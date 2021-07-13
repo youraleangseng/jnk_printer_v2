@@ -44,8 +44,7 @@ dependencies:
   path_provider: ^2.0.2
   pinput: ^1.2.0
   pos_printer_manager:
-    git:
-      url: https://github.com/ambanikousik/pos_printer_manager.git
+    path: pos_printer_manager
   provider: ^5.0.0
   webcontent_converter: ^0.0.6+2
 
