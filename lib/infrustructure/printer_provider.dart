@@ -1,16 +1,14 @@
 import 'package:logger/logger.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:pos_printer_manager/pos_printer_manager.dart';
+// ignore: import_of_legacy_library_into_null_safe
+import 'package:pos_printer_manager/receipt/receipt.dart';
 import 'package:printer/domain/failure/failure.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:dartz/dartz.dart';
 import 'package:printer/domain/i_printer_provider.dart';
 import 'package:printer/domain/print_doc/print_doc.dart';
-import 'package:printer/infrustructure/service.dart';
 // ignore: import_of_legacy_library_into_null_safe
-import 'package:webcontent_converter/webcontent_converter.dart';
-
-import 'demo.dart';
 
 class PrinterProvider extends IPrinterProvider {
   @override
@@ -59,25 +57,74 @@ class PrinterProvider extends IPrinterProvider {
     }
   }
 
+  // @override
+  // Future<Option<Failure>> print(PrintDoc doc) async {
+  //   try {
+  //     bool connected = await isConnected();
+  //     if (connected) {
+  //       final content = Demo.getShortReceiptContent();
+  //       var bytes = await WebcontentConverter.contentToImage(content: content);
+  //       ESCPrinterService service =
+  //           ESCPrinterService(bytes, bluetooth!.profile, PaperSize.mm58);
+  //       var data = await service.getBytes();
+  //       Logger().i("isConnected $connected");
+  //       bluetooth!.writeBytes(data, isDisconnect: false);
+
+  //       return none();
+  //     } else {
+  //       return some(Failure('You are not connected'));
+  //     }
+  //   } catch (e) {
+  //     return some(Failure(e.toString()));
+  //   }
+  // }
+
   @override
   Future<Option<Failure>> print(PrintDoc doc) async {
-    try {
-      bool connected = await isConnected();
-      if (connected) {
-        final content = Demo.getShortReceiptContent();
-        var bytes = await WebcontentConverter.contentToImage(content: content);
-        ESCPrinterService service =
-            ESCPrinterService(bytes, bluetooth!.profile, PaperSize.mm58);
-        var data = await service.getBytes();
-        Logger().i("isConnected $connected");
-        bluetooth!.writeBytes(data, isDisconnect: false);
+    bool connected = await isConnected();
+    if (connected) {
+      /// Example for Print Text
+      final ReceiptSectionText receiptText = ReceiptSectionText();
 
-        return none();
-      } else {
-        return some(Failure('You are not connected'));
-      }
-    } catch (e) {
-      return some(Failure(e.toString()));
+      receiptText.addSpacer();
+      receiptText.addText(
+        'Joonak Printer',
+        style: ReceiptTextStyleType.bold,
+      );
+
+      receiptText.addSpacer(useDashed: true);
+      receiptText.addLeftRightText(
+        'Phone',
+        doc.phone,
+      );
+      receiptText.addLeftRightText(
+        'Name',
+        doc.name,
+      );
+      receiptText.addLeftRightText(
+        'Location',
+        doc.location,
+      );
+      receiptText.addSpacer(useDashed: true);
+
+      receiptText.addLeftRightText(
+        'Price',
+        doc.price.toString(),
+      );
+      receiptText.addLeftRightText(
+        'Delivery fee',
+        doc.deliveryFee.toString(),
+      );
+      receiptText.addLeftRightText(
+        'Total',
+        doc.total.toString(),
+      );
+      receiptText.addSpacer(count: 2);
+
+      await bluetooth!.printReceiptText(receiptText);
+      return none();
+    } else {
+      return some(const Failure('You are not connected'));
     }
   }
 }

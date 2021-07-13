@@ -7,8 +7,11 @@ import 'package:esc_pos_utils_plus/esc_pos_utils.dart';
 import 'package:pos_printer_manager/enums/connection_response.dart';
 import 'package:pos_printer_manager/models/bluetooth_printer.dart';
 import 'package:pos_printer_manager/models/pos_printer.dart';
+import 'package:pos_printer_manager/receipt/receipt.dart';
+import 'package:webcontent_converter/webcontent_converter.dart';
 import 'bluetooth_service.dart';
 import 'printer_manager.dart';
+import 'package:image/image.dart' as img;
 
 /// Bluetooth Printer
 class BluetoothPrinterManager extends PrinterManager {
@@ -75,6 +78,55 @@ class BluetoothPrinterManager extends PrinterManager {
               ))
           .toList()
     ];
+  }
+
+  /// This method only for print text
+  /// value and styling inside model [ReceiptSectionText].
+  /// [feedCount] to create more space after printing process done
+  /// [useCut] to cut printing process
+  Future<void> printReceiptText(
+    ReceiptSectionText receiptSectionText, {
+    int feedCount = 0,
+    bool useCut = false,
+  }) async {
+    final Uint8List bytes = await WebcontentConverter.contentToImage(
+        content: receiptSectionText.content);
+    final List<int> byteBuffer = await _getBytes(
+      bytes,
+      paperSize: PaperSize.mm58,
+      feedCount: feedCount,
+      useCut: useCut,
+    );
+    writeBytes(byteBuffer, isDisconnect: false);
+  }
+
+  /// This method to convert byte from [data] into as image canvas.
+  /// It will automatically set width and height based [paperSize].
+  /// [customWidth] to print image with specific width
+  /// [feedCount] to generate byte buffer as feed in receipt.
+  /// [useCut] to cut of receipt layout as byte buffer.
+  Future<List<int>> _getBytes(
+    List<int> data, {
+    PaperSize paperSize = PaperSize.mm58,
+    int customWidth = 0,
+    int feedCount = 0,
+    bool useCut = false,
+  }) async {
+    List<int> bytes = <int>[];
+    final CapabilityProfile profile = await CapabilityProfile.load();
+    final Generator generator = Generator(PaperSize.mm58, profile);
+    final img.Image _resize = img.copyResize(
+      img.decodeImage(data),
+      width: customWidth > 0 ? customWidth : paperSize.width,
+    );
+    bytes += generator.imageRaster(_resize);
+    if (feedCount > 0) {
+      bytes += generator.feed(feedCount);
+    }
+    if (useCut) {
+      bytes += generator.cut();
+    }
+    return bytes;
   }
 
   /// [writeBytes] let you write raw list int data into socket
