@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
+import 'package:flutter/services.dart';
 import 'package:logger/logger.dart';
 // ignore: import_of_legacy_library_into_null_safe
 import 'package:pos_printer_manager/pos_printer_manager.dart';
@@ -8,6 +12,7 @@ import 'package:printer/domain/failure/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:printer/domain/i_printer_provider.dart';
 import 'package:printer/domain/print_doc/print_doc.dart';
+import 'package:printer/resources/resources.dart';
 // ignore: import_of_legacy_library_into_null_safe
 
 class PrinterProvider extends IPrinterProvider {
@@ -85,13 +90,22 @@ class PrinterProvider extends IPrinterProvider {
     if (connected) {
       /// Example for Print Text
       final ReceiptSectionText receiptText = ReceiptSectionText();
-
+      final ByteData logoBytes = await rootBundle.load(Assets.joonaakLogoBw);
+      receiptText.addImage(
+        base64.encode(Uint8List.view(logoBytes.buffer)),
+        width: 150,
+      );
       receiptText.addSpacer();
       receiptText.addText(
-        'Joonak Printer',
+        'ជូនអ្នក',
         style: ReceiptTextStyleType.bold,
       );
 
+      final ByteData barCodeBytes = await rootBundle.load(Assets.barCode);
+      receiptText.addImage(
+        base64.encode(Uint8List.view(barCodeBytes.buffer)),
+        width: 150,
+      );
       receiptText.addSpacer(useDashed: true);
       receiptText.addLeftRightText(
         'Phone',
