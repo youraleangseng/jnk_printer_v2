@@ -90,7 +90,7 @@ class PrinterProvider extends IPrinterProvider {
     if (connected) {
       /// Example for Print Text
       final ReceiptSectionText receiptText = ReceiptSectionText();
-      final ByteData logoBytes = await rootBundle.load(Assets.motoBw);
+      final ByteData logoBytes = await rootBundle.load(Assets.joonaak2);
       receiptText.addImage(
         base64.encode(Uint8List.view(logoBytes.buffer)),
         width: 200,
@@ -101,25 +101,20 @@ class PrinterProvider extends IPrinterProvider {
         style: ReceiptTextStyleType.bold,
       );
 
-      final ByteData barCodeBytes = await rootBundle.load(Assets.barCode);
-      receiptText.addImage(
-        base64.encode(Uint8List.view(barCodeBytes.buffer)),
-        width: 300,
+      receiptText.addSpacer(useDashed: true);
+      receiptText.addLeftRightText(
+        'Phone',
+        doc.phone,
+      );
+      receiptText.addLeftRightText(
+        'Name',
+        doc.name,
+      );
+      receiptText.addLeftRightText(
+        'Location',
+        doc.location,
       );
       receiptText.addSpacer(useDashed: true);
-      // receiptText.addLeftRightText(
-      //   'Phone',
-      //   doc.phone,
-      // );
-      // receiptText.addLeftRightText(
-      //   'Name',
-      //   doc.name,
-      // );
-      // receiptText.addLeftRightText(
-      //   'Location',
-      //   doc.location,
-      // );
-      // receiptText.addSpacer(useDashed: true);
 
       receiptText.addLeftRightText(
         'Price',

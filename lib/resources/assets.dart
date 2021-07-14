@@ -5,6 +5,7 @@ class Assets {
 
   static const String logoBw = 'assets/images/logo-bw.png';
   static const String joonaakLogo = 'assets/images/joonaak-logo.png';
+  static const String joonaak2 = 'assets/images/joonaak-2.png';
   static const String joonaakLogoBw = 'assets/images/joonaak-logo-bw.png';
   static const String instagram = 'assets/images/instagram.png';
   static const String tiktok = 'assets/images/tiktok.png';
