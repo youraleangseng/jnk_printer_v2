@@ -90,10 +90,10 @@ class PrinterProvider extends IPrinterProvider {
     if (connected) {
       /// Example for Print Text
       final ReceiptSectionText receiptText = ReceiptSectionText();
-      final ByteData logoBytes = await rootBundle.load(Assets.logoBw);
+      final ByteData logoBytes = await rootBundle.load(Assets.motoBw);
       receiptText.addImage(
         base64.encode(Uint8List.view(logoBytes.buffer)),
-        width: 150,
+        width: 200,
       );
       receiptText.addSpacer();
       receiptText.addText(
