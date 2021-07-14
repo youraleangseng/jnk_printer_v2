@@ -3,6 +3,7 @@ part of 'resources.dart';
 class Assets {
   Assets._();
 
+  static const String logoBw = 'assets/images/logo-bw.png';
   static const String joonaakLogo = 'assets/images/joonaak-logo.png';
   static const String joonaakLogoBw = 'assets/images/joonaak-logo-bw.png';
   static const String instagram = 'assets/images/instagram.png';

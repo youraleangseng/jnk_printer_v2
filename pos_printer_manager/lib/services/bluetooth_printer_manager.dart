@@ -158,16 +158,16 @@ class BluetoothPrinterManager extends PrinterManager {
             }
           }
         }
-        // await printerService?.write(data);
-        final len = data.length;
-        List<List<int>> chunks = [];
-        for (var i = 0; i < len; i += 100) {
-          var end = (i + 100 < len) ? i + 100 : len;
-          chunks.add(data.sublist(i, end));
-        }
-        for (var i = 0; i < chunks.length; i++) {
-          await printerService?.write(chunks[i]);
-        }
+        await printerService?.write(data);
+        // final len = data.length;
+        // List<List<int>> chunks = [];
+        // for (var i = 0; i < len; i += 100) {
+        //   var end = (i + 100 < len) ? i + 100 : len;
+        //   chunks.add(data.sublist(i, end));
+        // }
+        // for (var i = 0; i < chunks.length; i++) {
+        //   await printerService?.write(chunks[i]);
+        // }
       }
     } catch (e) {
       print("Error : $e");
