@@ -100,7 +100,12 @@ class PrinterProvider extends IPrinterProvider {
         'ជូនអ្នក',
         style: ReceiptTextStyleType.bold,
       );
-
+      receiptText.addSpacer();
+      final ByteData barcodeBytes = await rootBundle.load(Assets.barCode);
+      receiptText.addImage(
+        base64.encode(Uint8List.view(barcodeBytes.buffer)),
+        width: 300,
+      );
       receiptText.addSpacer(useDashed: true);
       receiptText.addLeftRightText(
         'Phone',
